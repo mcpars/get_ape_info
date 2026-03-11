@@ -15,9 +15,10 @@ with open('ape_abi.json', 'r') as f:
 
 ############################
 # Connect to an Ethereum node
-api_url = ""  # YOU WILL NEED TO PROVIDE THE URL OF AN ETHEREUM NODE
+api_url = "https://mainnet.infura.io/v3/d59991e8df07469796a0e81d0c148b83"   # YOU WILL NEED TO PROVIDE THE URL OF AN ETHEREUM NODE
 provider = HTTPProvider(api_url)
 web3 = Web3(provider)
+contract = web3.eth.contract(address=contract)address, abi=abi)
 
 
 def get_ape_info(ape_id):
