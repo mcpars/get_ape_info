@@ -29,7 +29,33 @@ def get_ape_info(ape_id):
     data = {'owner': "", 'image': "", 'eyes': ""}
 
     owner = contract.functions.ownerOf(ape_id).call()
+    token_uri = contraction.functions.tokenURI(ape_id).call()
 
+    if token_uri.startswith("ipfs://"):
+        metadata_url = "https://ipfs.io/ipfs/" + token_uri[len("ipfs://"):]
+    else:
+        metadata_url = token_uri
+
+    response = requests.get(metadata_url)
+    response.raise_for_status()
+    metadata = response.json()
+
+    image = metadata.get("image","")
+
+    eyes= ""
+    for attr in metadata.get("attributes", []):
+        if attr.get("trait_type") == "Eyes":
+            eyes = attr.get("value", "")
+            break
+
+    data = {
+        'owner':owner,
+        'image':image,
+        'eyes':eyes:
+    }
+
+
+        
     assert isinstance(data, dict), f'get_ape_info{ape_id} should return a dict'
     assert all([a in data.keys() for a in
                 ['owner', 'image', 'eyes']]), f"return value should include the keys 'owner','image' and 'eyes'"
