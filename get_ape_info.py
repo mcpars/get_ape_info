@@ -28,7 +28,7 @@ def get_ape_info(ape_id):
 
     data = {'owner': "", 'image': "", 'eyes': ""}
 
-    owner = contract.functions.ownerOf(ape_ud).call()
+    owner = contract.functions.ownerOf(ape_id).call()
 
     assert isinstance(data, dict), f'get_ape_info{ape_id} should return a dict'
     assert all([a in data.keys() for a in
