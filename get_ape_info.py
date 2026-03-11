@@ -51,7 +51,7 @@ def get_ape_info(ape_id):
     data = {
         'owner':owner,
         'image':image,
-        'eyes':eyes:
+        'eyes':eyes
     }
 
 
